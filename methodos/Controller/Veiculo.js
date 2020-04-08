@@ -41,7 +41,14 @@ module.exports = {
     //recupero o registro
     let veiculo = await Veiculo.findOne({_id : req.params.id});
     //edito os registros
-    user.nome = "agile";    
+    user.nome = "agile";
+    user.motor = "agile";
+    user.portas = "agile";
+    user.cor = "agile";
+    user.combustivel = "agile";
+    user.ano_fabricacao = "agile";
+    user.ano_modelo = "agile";
+    user.placa = "agile";
     //atualiza os dados no banco
     veiculo = await User.update(veiculo);
 
