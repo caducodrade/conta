@@ -1,56 +1,49 @@
-//index,show,store,update,destroy
-const User = require('../Model/User')
+const Marca = require('../Model/Marca')
 
 module.exports = {
   //Index traz todos os registros pelo methodo Get
   async index(req,res){
     //Busca todos os registross
-    let users = await User.find();
-    return res.json(users);
+    let marcas = await Marca.find();
+    return res.json(marca);
   },
 
   //show traz um registro onde o id do registro é igual ao id assado na url
   async show(req, res){
     //Busca um registro no banco
-    let user = await User.findOne({_id : req.params.id});
-    return res.json(user);
+    let marca = await Marca.findOne({_id : req.params.id});
+    return res.json(marca);
   },
 
   //Store usa o methodo POST para gravar
   async store(req, res){
     //passa os dados que veio do post para uma variavel
-    const nome = req.body.nome;
-    const senha = req.body.senha;
-    const email = req.body.email;
-    const status = req.body.status;
-    const idade = req.body.idade;
+    const nome = req.body.nome;    
     //busca se ja tem algum usuaro com esse email
-    let user = await User.findOne({email});
+    let marca = await Marca.findOne({nome});
     //compara se houve resultado
-    if(!user){
+    if(!marca){
       //se nao houver resultado grava o novo usuario
-      user = await User.create({nome,senha,email,status,idade});
+      marca = await Marca.create({nome});
     }
-    return res.json(user);
+    return res.json(marca);
   },
   
   //update pega o id, busca no banco esse registro, alreta ele no controlador e manda gravar
   async update(req, res){
     //recupero o registro
-    let user = await User.findOne({_id : req.params.id});
+    let marca = await Marca.findOne({_id : req.params.id});
     //edito os registros
-    user.nome = "Hericson Ramos Forti";
-    user.email = "sis4web@gmal.com";
-    user.senha = "senha123456";
+    user.nome = "ford";    
     //atualiza os dados no banco
-    user = await User.update(user);
+    marca = await User.update(marca);
 
-    return res.json(user);
+    return res.json(marca);
   },
 
   //delete = apaga o registro de cordo com o id pasasado no parametro
   async destroy(req, res){
-    let user = await User.deleteOne({_id : req.params.id});
-    return res.json(user);
+    let marca = await Marca.deleteOne({_id : req.params.id});
+    return res.json(marca);
   }
 };

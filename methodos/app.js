@@ -1,4 +1,3 @@
-
 //npm install express
 //npm install nodemon
 //atualizar o packge.json 
@@ -12,16 +11,15 @@ const app = express();
 const port = 3000;
 const hostname = "127.0.0.1";
 
-mongoose.connect('mongodb+srv://Caio:253105@cluster0-mbjwu.mongodb.net/Biqueira?retryWrites=true&w=majority', 
+//Acessar site da Atlas Mongo DB - Criar uma conta e criar um cluster Free 
+mongoose.connect('mongodb+srv://Caio:253105@cluster0-mbjwu.mongodb.net/Biqueira?retryWrites=true&w=majority',
 {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 });
 
 app.use(express.json());
 app.use(routes);
-
-//Acessar site da Atlas Mongo DB - Criar uma conta e criar um cluster Free 
 
 //imprime no console qua a porta e qual o server que esta rodando aaplicação
 app.listen(port, hostname,()=>{

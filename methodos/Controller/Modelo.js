@@ -1,56 +1,49 @@
-//index,show,store,update,destroy
-const User = require('../Model/User')
+const Modelo = require('../Model/Modelo')
 
 module.exports = {
   //Index traz todos os registros pelo methodo Get
   async index(req,res){
     //Busca todos os registross
-    let users = await User.find();
-    return res.json(users);
+    let modelos = await Modelo.find();
+    return res.json(modelos);
   },
 
   //show traz um registro onde o id do registro é igual ao id assado na url
   async show(req, res){
     //Busca um registro no banco
-    let user = await User.findOne({_id : req.params.id});
-    return res.json(user);
+    let modelo = await Modelo.findOne({_id : req.params.id});
+    return res.json(modelo);
   },
 
   //Store usa o methodo POST para gravar
   async store(req, res){
     //passa os dados que veio do post para uma variavel
-    const nome = req.body.nome;
-    const senha = req.body.senha;
-    const email = req.body.email;
-    const status = req.body.status;
-    const idade = req.body.idade;
+    const nome = req.body.nome;    
     //busca se ja tem algum usuaro com esse email
-    let user = await User.findOne({email});
+    let modelo = await Modelo.findOne({nome});
     //compara se houve resultado
-    if(!user){
+    if(!modelo){
       //se nao houver resultado grava o novo usuario
-      user = await User.create({nome,senha,email,status,idade});
+      modelo = await Modelo.create({nome});
     }
-    return res.json(user);
+    return res.json(modelo);
   },
   
   //update pega o id, busca no banco esse registro, alreta ele no controlador e manda gravar
   async update(req, res){
     //recupero o registro
-    let user = await User.findOne({_id : req.params.id});
+    let modelo = await Modelo.findOne({_id : req.params.id});
     //edito os registros
-    user.nome = "Hericson Ramos Forti";
-    user.email = "sis4web@gmal.com";
-    user.senha = "senha123456";
+    user.nome = "corolla";    
     //atualiza os dados no banco
-    user = await User.update(user);
+    modelo = await User.update(modelo);
 
-    return res.json(user);
+    return res.json(modelo);
   },
 
   //delete = apaga o registro de cordo com o id pasasado no parametro
   async destroy(req, res){
-    let user = await User.deleteOne({_id : req.params.id});
-    return res.json(user);
+    let modelo = await Modelo.deleteOne({_id : req.params.id});
+    return res.json(modelo);
   }
 };
